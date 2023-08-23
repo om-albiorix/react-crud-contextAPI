@@ -1,12 +1,7 @@
-import React from "react";
-import HomePage from "./components/HomePage";
 import { createContext, useContext, useEffect, useState } from "react";
-
 const UserContext = createContext(null);
 
-const useUser = () => useContext(UserContext);
-
-const App = () => {
+const UserProvider = ({ users, Children }) => {
   const [userdata, setUserdata] = useState([]);
   useEffect(() => {
     fetch("http://localhost:9000/user")
@@ -20,10 +15,8 @@ const App = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={userdata}>
-      <HomePage />
+    <UserContext.Provider value={{ userdata, setUserdata }}>
+      {Children}
     </UserContext.Provider>
   );
 };
-
-export { App, useUser };

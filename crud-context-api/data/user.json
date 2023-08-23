@@ -1,0 +1,40 @@
+{
+    "user":[
+    {
+    "fname": "Bird ",
+    "lname":"Ramsey",
+    "picture": "http://placehold.it/32x32",
+    "age": 21,
+    "gender": "male",
+    "email": "birdramsey@nimon.com",
+    "id":1
+    },
+    {
+    "fname": "mathew ",
+    "lname":"headen",
+    "picture": "http://placehold.it/32x32",
+    "age": 20,
+    "gender": "male",
+    "email": "birdramsey@nimon.com",
+    "id":2
+    },
+    {
+    "fname": "chales ",
+    "lname":"titan",
+    "picture": "http://placehold.it/32x32",
+    "age": 3,
+    "gender": "male",
+    "email": "birdramsey@nimon.com",
+    "id":3
+    },
+    {
+    "fname": "jonas ",
+    "lname":"schemandan",
+    "picture": "http://placehold.it/32x32",
+    "age": 2,
+    "gender": "male",
+    "email": "birdramsey@nimon.com",
+    "id":4
+    }
+  ]
+}
