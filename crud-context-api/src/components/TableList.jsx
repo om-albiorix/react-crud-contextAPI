@@ -1,24 +1,15 @@
-import React from "react";
-import { useUser } from "../App";
+import React, { useContext } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { UserContext } from "../contexts/UserContext";
+import { HandleDeleteData } from "../contexts/UserContext";
 
 function TableList() {
-  const test = useUser();
-
-  const handleDelete = (index) => {
-    fetch(`"http://localhost:9000/user$/${index}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
-  };
-
+  const userList = useContext(UserContext);
   return (
     <div>
-      <table class="table">
-        <thead class="thead-dark">
+      <table className="table">
+        <thead className="thead-dark">
           <tr>
             <th scope="col">FullName</th>
             <th scope="col">Email</th>
@@ -29,14 +20,14 @@ function TableList() {
           </tr>
         </thead>
         <tbody>
-          {test.map((data, index) => {
+          {userList.map((data, index) => {
             return (
               <tr key={index}>
                 <td scope="row">{data.fname + data.lname}</td>
                 <td>{data.email}</td>
                 <td>{data.age}</td>
                 <td>{data.gender}</td>
-                <td onClick={handleDelete(index)}>
+                <td onClick={HandleDeleteData(index)}>
                   <button className="btn btn-danger">
                     <DeleteIcon />
                   </button>
