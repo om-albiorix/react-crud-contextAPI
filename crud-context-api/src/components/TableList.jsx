@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { UserContext } from "../contexts/UserContext";
-import { HandleDeleteData } from "../contexts/UserContext";
 
 function TableList() {
-  const userList = useContext(UserContext);
+  const { userdata, handleDelete } = useContext(UserContext);
+
   return (
     <div>
       <table className="table">
@@ -15,24 +15,25 @@ function TableList() {
             <th scope="col">Email</th>
             <th scope="col">Age</th>
             <th scope="col">Gender</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Update</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          {userList.map((data, index) => {
+          {userdata?.map((data, index) => {
             return (
               <tr key={index}>
                 <td scope="row">{data.fname + data.lname}</td>
                 <td>{data.email}</td>
                 <td>{data.age}</td>
                 <td>{data.gender}</td>
-                <td onClick={HandleDeleteData(index)}>
-                  <button className="btn btn-danger">
+                <td>
+                  <button
+                    className="btn btn-danger deletebtn"
+                    onClick={() => handleDelete(data.id)}
+                  >
                     <DeleteIcon />
                   </button>
-                </td>
-                <td>
+
                   <button className="btn btn-primary">
                     <EditIcon />
                   </button>

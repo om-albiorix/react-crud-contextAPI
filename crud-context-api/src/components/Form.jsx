@@ -1,22 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { TextField } from "@mui/material";
-import DropBtn from "./DropBtn";
+import { UserContext } from "../contexts/UserContext";
+// import DropBtn from "./DropBtn";
 
 function Form() {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (fname || lname || email || gender === "")
-      alert("input field must be not empty");
-  };
+  const { userdata, handleDelete, handleAdd } = useContext(UserContext);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div>
           <div>
             <TextField
@@ -46,13 +43,16 @@ function Form() {
           <br />
           <TextField
             className="w-50"
-            label="gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
+            label="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
           />
           <br />
-          <DropBtn className="w-50 mb-2" />
-          <button className="btn btn-success mt-2  d-flex justify-content-center">
+          {/* <DropBtn className="w-50 mb-2" /> */}
+          <button
+            className="btn btn-success mt-2  d-flex justify-content-center m-auto"
+            onClick={() => handleAdd(email, fname, lname, age)}
+          >
             ADD
           </button>
         </div>
