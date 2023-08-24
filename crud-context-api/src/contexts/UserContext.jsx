@@ -4,15 +4,29 @@ const UserContext = createContext(null);
 
 const UserProvider = ({ children }) => {
   const [userdata, setUserdata] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
-    fetch("http://localhost:9000/user")
+    fetch("http://localhost:9000/user", {
+      method: "GET",
+    })
       .then((response) => {
         const data = response.json();
+        console.log(data);
         return data;
       })
       .then((data) => {
         setUserdata(data);
+      })
+      .catch((err) => {
+        console.log({ err });
       });
   }, []);
 
@@ -29,29 +43,52 @@ const UserProvider = ({ children }) => {
       });
   };
 
-  const handleAdd = (fname, lname, age, email, e) => {
-    e.preventDefault();
-    fetch(`http://localhost:9000/user`, {
+  const handleEdit = () => {
+    console.log("hi");
+  };
+
+  const handleAdd = (fname, lname, age, email) => {
+    if (fname === "" || lname === "" || age === "" || email === "")
+      alert("All Field  must be filled out");
+    fetch("http://localhost:9000/user", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         fname: fname,
         lname: lname,
-        age: age,
         email: email,
+        age: age,
       }),
     })
-      .then((res) => {
-        const data = res.json();
-        console.log("adddata", data);
-        return data;
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
       })
       .then((data) => {
-        setUserdata((user) => [...user, data]);
+        console.log({ data });
+        setUserdata((prevUserData) => [...prevUserData, data]);
+      })
+      .catch((error) => {
+        console.error("Error adding user:", error);
       });
   };
 
   return (
-    <UserContext.Provider value={{ userdata, handleDelete, handleAdd }}>
+    <UserContext.Provider
+      value={{
+        userdata,
+        handleDelete,
+        handleAdd,
+        handleEdit,
+        handleClickOpen,
+        handleClose,
+        open,
+      }}
+    >
       {children?.length > 1 ? children[1] : children}
     </UserContext.Provider>
   );

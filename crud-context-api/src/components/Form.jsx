@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
 // import DropBtn from "./DropBtn";
 
-function Form() {
+function Form({ onClose }) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -51,7 +51,11 @@ function Form() {
           {/* <DropBtn className="w-50 mb-2" /> */}
           <button
             className="btn btn-success mt-2  d-flex justify-content-center m-auto"
-            onClick={() => handleAdd(email, fname, lname, age)}
+            onClick={(e) => {
+              e.preventDefault();
+              handleAdd(fname, lname, age, email);
+              onClose();
+            }}
           >
             ADD
           </button>

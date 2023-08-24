@@ -4,7 +4,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import { UserContext } from "../contexts/UserContext";
 
 function TableList() {
-  const { userdata, handleDelete } = useContext(UserContext);
+  const {
+    userdata,
+    handleDelete,
+    handleAdd,
+    handleEdit,
+    handleClickOpen,
+    handleClose,
+    open,
+  } = useContext(UserContext);
 
   return (
     <div>
@@ -14,18 +22,19 @@ function TableList() {
             <th scope="col">FullName</th>
             <th scope="col">Email</th>
             <th scope="col">Age</th>
-            <th scope="col">Gender</th>
+            {/* <th scope="col">Gender</th> */}
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           {userdata?.map((data, index) => {
+            console.log(userdata);
             return (
               <tr key={index}>
-                <td scope="row">{data.fname + data.lname}</td>
+                <td scope="row">{data.fname + " " + data.lname}</td>
                 <td>{data.email}</td>
                 <td>{data.age}</td>
-                <td>{data.gender}</td>
+                {/* <td>{data.gender}</td> */}
                 <td>
                   <button
                     className="btn btn-danger deletebtn"
@@ -34,7 +43,13 @@ function TableList() {
                     <DeleteIcon />
                   </button>
 
-                  <button className="btn btn-primary">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      handleEdit(data.id);
+                      handleClickOpen();
+                    }}
+                  >
                     <EditIcon />
                   </button>
                 </td>

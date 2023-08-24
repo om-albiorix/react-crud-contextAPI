@@ -7,6 +7,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Form from "./Form";
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -47,19 +49,24 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function ModalForm() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const {
+    userdata,
+    handleDelete,
+    handleAdd,
+    handleEdit,
+    handleClickOpen,
+    handleClose,
+    open,
+  } = useContext(UserContext);
 
   return (
     <div className="w-100">
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open dialog
+      <Button
+        className="btn btn-success"
+        variant="outlined"
+        onClick={handleClickOpen}
+      >
+        ADD User
       </Button>
       <BootstrapDialog
         onClose={handleClose}
@@ -73,7 +80,7 @@ export default function ModalForm() {
         >
           User Add Form
         </BootstrapDialogTitle>
-        <Form />
+        <Form onClose={handleClose} />
       </BootstrapDialog>
     </div>
   );

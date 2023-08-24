@@ -1,28 +1,94 @@
 {
   "user": [
     {
-    "fname":"james",
-    "lname":"bond",
-    "id":"1",
-    "gender":"male",
-    "age":"20",
-    "email":"james@gmail.com"
-  },
+      "fname": "james",
+      "lname": "bond",
+      "id": "1",
+      "gender": "male",
+      "age": "20",
+      "email": "james@gmail.com"
+    },
     {
-    "fname":"micheal",
-    "lname":"clark",
-    "id":"2",
-    "gender":"male",
-    "age":"20",
-    "email":"micheal@gmail.com"
-  },
+      "fname": "micheal",
+      "lname": "clark",
+      "id": "2",
+      "gender": "male",
+      "age": "20",
+      "email": "micheal@gmail.com"
+    },
     {
-    "fname":"jhonny",
-    "lname":"bairtow",
-    "id":"3",
-    "gender":"male",
-    "age":"20",
-    "email":"jhonny@gmail.com"
-  }
-]
+      "fname": "jhonny",
+      "lname": "bairtow",
+      "id": "3",
+      "gender": "male",
+      "age": "20",
+      "email": "jhonny@gmail.com"
+    },
+    {
+      "fname": "om",
+      "lname": "solanki",
+      "email": "omsolanki3698@gmail.com",
+      "age": "20",
+      "id": "XckZWEe"
+    },
+    {
+      "fname": "Om",
+      "lname": "Solanki",
+      "email": "omsolanki3698@gmail.com",
+      "age": "22",
+      "id": "z-rGiUI"
+    },
+    {
+      "fname": "",
+      "lname": "",
+      "email": "",
+      "age": "",
+      "id": "14p63bh"
+    },
+    {
+      "id": "OlHvjch"
+    },
+    {
+      "id": "FdHlF9B"
+    },
+    {
+      "id": "Tbo0zBi"
+    },
+    {
+      "id": "TByWYIG"
+    },
+    {
+      "id": "1_dK3hf"
+    },
+    {
+      "id": "9fY8sj8"
+    },
+    {
+      "id": "QYmwPo0"
+    },
+    {
+      "id": "39mqoYO"
+    },
+    {
+      "id": "yNVWlvB"
+    },
+    {
+      "id": "SFFsgMG"
+    },
+    {
+      "id": "LNVRiVe"
+    },
+    {
+      "id": "Ow17npn"
+    },
+    {
+      "id": "3rwy0OA"
+    },
+    {
+      "id": "Fh2Z7RQ"
+    },
+    {
+      "id": "uCGuQ3p"
+    }
+  ]
 }
