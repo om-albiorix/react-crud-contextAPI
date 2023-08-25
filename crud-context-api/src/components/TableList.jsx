@@ -46,7 +46,7 @@ function TableList() {
                   <button
                     className="btn btn-primary"
                     onClick={() => {
-                      handleEdit(data.id);
+                      handleEdit(data.fname, data.lname, data.age, data.id);
                       handleClickOpen();
                     }}
                   >

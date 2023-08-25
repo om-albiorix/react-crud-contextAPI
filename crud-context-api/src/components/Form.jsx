@@ -18,6 +18,7 @@ function Form({ onClose }) {
           <div>
             <TextField
               className="w-50"
+              name="fname"
               onChange={(e) => setFname(e.target.value)}
               label="FirstName"
               value={fname}

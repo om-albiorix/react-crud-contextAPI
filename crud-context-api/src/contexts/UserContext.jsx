@@ -43,13 +43,42 @@ const UserProvider = ({ children }) => {
       });
   };
 
-  const handleEdit = () => {
-    console.log("hi");
+  const handleEdit = (fname, lname, age, id, email) => {
+    fetch(`http://localhost:9000/user/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        fname: fname,
+        lname: lname,
+        email: email,
+        age: age,
+      }),
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          return;
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        const updatedUsers = userdata.map((user) => {
+          if (user.id === id) {
+            user.fname = fname;
+            user.lname = lname;
+            user.email = email;
+            user.age = age;
+          }
+          return user;
+        });
+        setUserdata((users) => updatedUsers);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleAdd = (fname, lname, age, email) => {
     if (fname === "" || lname === "" || age === "" || email === "")
       alert("All Field  must be filled out");
+
     fetch("http://localhost:9000/user", {
       method: "POST",
       headers: {
