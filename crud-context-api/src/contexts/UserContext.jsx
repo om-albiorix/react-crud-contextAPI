@@ -5,12 +5,14 @@ const UserContext = createContext(null);
 const UserProvider = ({ children }) => {
   const [userdata, setUserdata] = useState([]);
   const [open, setOpen] = useState(false);
+  const [editdata, setEditData] = useState(null);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+    setEditData({});
   };
 
   useEffect(() => {
@@ -19,7 +21,6 @@ const UserProvider = ({ children }) => {
     })
       .then((response) => {
         const data = response.json();
-        console.log(data);
         return data;
       })
       .then((data) => {
@@ -43,67 +44,60 @@ const UserProvider = ({ children }) => {
       });
   };
 
-  const handleEdit = (fname, lname, age, id, email) => {
-    fetch(`http://localhost:9000/user/${id}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        fname: fname,
-        lname: lname,
-        email: email,
-        age: age,
-      }),
-    })
-      .then((response) => {
-        if (response.status !== 200) {
-          return;
-        } else {
-          return response.json();
-        }
-      })
-      .then((data) => {
-        const updatedUsers = userdata.map((user) => {
-          if (user.id === id) {
-            user.fname = fname;
-            user.lname = lname;
-            user.email = email;
-            user.age = age;
-          }
-          return user;
-        });
-        setUserdata((users) => updatedUsers);
-      })
-      .catch((error) => console.log(error));
+  const handleEdit = (fname, lname, age, email, id) => {
+    setEditData({ fname, lname, age, id, email });
   };
 
   const handleAdd = (fname, lname, age, email) => {
-    if (fname === "" || lname === "" || age === "" || email === "")
-      alert("All Field  must be filled out");
-
-    fetch("http://localhost:9000/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fname: fname,
-        lname: lname,
-        email: email,
-        age: age,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
+    if (editdata) {
+      fetch(`http://localhost:9000/user/${editdata.id}`, {
+        method: "PUT",
       })
-      .then((data) => {
-        console.log({ data });
-        setUserdata((prevUserData) => [...prevUserData, data]);
+        .then((res) => {
+          const data = res.json();
+          console.log(data);
+          return data;
+        })
+        .then((data) => {
+          const updatedUsers = userdata.map((user) => {
+            if (user.id === editdata.id) {
+              user.fname = fname;
+              user.lname = lname;
+              user.email = email;
+              user.age = age;
+            }
+            return user;
+          });
+          console.log({ updatedUsers });
+          setUserdata((user) => updatedUsers);
+        });
+    } else {
+      fetch("http://localhost:9000/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fname: fname,
+          lname: lname,
+          email: email,
+          age: age,
+        }),
       })
-      .catch((error) => {
-        console.error("Error adding user:", error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log({ data });
+          setUserdata((prevUserData) => [...prevUserData, data]);
+        })
+        .catch((error) => {
+          console.error("Error adding user:", error);
+        });
+    }
   };
 
   return (
@@ -116,9 +110,11 @@ const UserProvider = ({ children }) => {
         handleClickOpen,
         handleClose,
         open,
+        editdata,
+        setUserdata,
       }}
     >
-      {children?.length > 1 ? children[1] : children}
+      {children}
     </UserContext.Provider>
   );
 };

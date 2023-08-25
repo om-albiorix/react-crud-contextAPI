@@ -15,6 +15,21 @@
       "gender": "male",
       "age": "20",
       "email": "micheal@gmail.com"
+    },
+    {
+      "fname": "jhonny",
+      "lname": "bairtow",
+      "id": "3",
+      "gender": "male",
+      "age": "20",
+      "email": "jhonny@gmail.com"
+    },
+    {
+      "fname": "kishan",
+      "lname": "solanki",
+      "email": "k@gmail.com",
+      "age": "20",
+      "id": "Ryug53D"
     }
   ]
 }

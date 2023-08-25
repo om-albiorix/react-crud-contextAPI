@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { UserContext } from "../contexts/UserContext";
-// import DropBtn from "./DropBtn";
+import DropBtn from "./DropBtn";
 
 function Form({ onClose }) {
   const [fname, setFname] = useState("");
@@ -9,7 +9,28 @@ function Form({ onClose }) {
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
 
-  const { userdata, handleDelete, handleAdd } = useContext(UserContext);
+  const {
+    userdata,
+    handleDelete,
+    handleAdd,
+    handleEdit,
+    editdata,
+    setUserdata,
+  } = useContext(UserContext);
+
+  useEffect(() => {
+    if (editdata) {
+      setFname(editdata.fname);
+      setAge(editdata.age);
+      setEmail(editdata.email);
+      setLname(editdata.lname);
+    } else {
+      setFname("");
+      setAge("");
+      setLname("");
+      setEmail("");
+    }
+  }, [editdata]);
 
   return (
     <div>
@@ -49,7 +70,7 @@ function Form({ onClose }) {
             onChange={(e) => setAge(e.target.value)}
           />
           <br />
-          {/* <DropBtn className="w-50 mb-2" /> */}
+          <DropBtn className="w-50 mb-2 mt-2" />
           <button
             className="btn btn-success mt-2  d-flex justify-content-center m-auto"
             onClick={(e) => {

@@ -22,7 +22,7 @@ function DropBtn() {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={age}
-            label="Age"
+            label="Gender"
             onChange={handleChange}
           >
             <MenuItem value={10}>Male</MenuItem>

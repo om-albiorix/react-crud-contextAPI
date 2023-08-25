@@ -28,7 +28,6 @@ function TableList() {
         </thead>
         <tbody>
           {userdata?.map((data, index) => {
-            console.log(userdata);
             return (
               <tr key={index}>
                 <td scope="row">{data.fname + " " + data.lname}</td>
@@ -46,7 +45,13 @@ function TableList() {
                   <button
                     className="btn btn-primary"
                     onClick={() => {
-                      handleEdit(data.fname, data.lname, data.age, data.id);
+                      handleEdit(
+                        data.fname,
+                        data.lname,
+                        data.age,
+                        data.email,
+                        data.id
+                      );
                       handleClickOpen();
                     }}
                   >
