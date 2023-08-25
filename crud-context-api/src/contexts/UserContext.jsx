@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const UserContext = createContext(null);
 
@@ -12,19 +13,14 @@ const UserProvider = ({ children }) => {
   };
   const handleClose = () => {
     setOpen(false);
-    setEditData({});
+    setEditData(null);
   };
 
   useEffect(() => {
-    fetch("http://localhost:9000/user", {
-      method: "GET",
-    })
+    axios
+      .get("http://localhost:9000/user")
       .then((response) => {
-        const data = response.json();
-        return data;
-      })
-      .then((data) => {
-        setUserdata(data);
+        setUserdata(response.data);
       })
       .catch((err) => {
         console.log({ err });
@@ -32,16 +28,9 @@ const UserProvider = ({ children }) => {
   }, []);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:9000/user/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => {
-        const data = res.json();
-        return data;
-      })
-      .then((data) => {
-        setUserdata((prevState) => prevState.filter((ele) => ele.id !== id));
-      });
+    axios.delete(`http://localhost:9000/user/${id}`).then((res) => {
+      setUserdata((prevState) => prevState.filter((ele) => ele.id !== id));
+    });
   };
 
   const handleEdit = (fname, lname, age, email, id) => {
@@ -50,11 +39,15 @@ const UserProvider = ({ children }) => {
 
   const handleAdd = (fname, lname, age, email) => {
     if (editdata) {
-      fetch(`http://localhost:9000/user/${editdata.id}`, {
-        method: "PUT",
-      })
-        .then((res) => {
-          const data = res.json();
+      axios
+        .put(`http://localhost:9000/user/${editdata.id}`, {
+          fname: fname,
+          lname: lname,
+          email: email,
+          age: age,
+        })
+        .then((response) => {
+          const data = response.data;
           console.log(data);
           return data;
         })
@@ -69,30 +62,21 @@ const UserProvider = ({ children }) => {
             return user;
           });
           console.log({ updatedUsers });
-          setUserdata((user) => updatedUsers);
+          setUserdata(updatedUsers);
+        })
+        .catch((error) => {
+          console.error("An error occurred:", error);
         });
     } else {
-      fetch("http://localhost:9000/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      axios
+        .post("http://localhost:9000/user", {
           fname: fname,
           lname: lname,
           email: email,
           age: age,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
         })
-        .then((data) => {
-          console.log({ data });
-          setUserdata((prevUserData) => [...prevUserData, data]);
+        .then((res) => {
+          setUserdata([res.data, ...userdata]);
         })
         .catch((error) => {
           console.error("Error adding user:", error);

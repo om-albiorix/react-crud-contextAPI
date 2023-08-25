@@ -78,8 +78,7 @@ export default function ModalForm() {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          {/* {handleAdd() ? "user add form" : "user edit form"} */}
-          User Add form
+          Add User
         </BootstrapDialogTitle>
         <Form onClose={handleClose} />
       </BootstrapDialog>

@@ -1,35 +1,18 @@
 {
   "user": [
     {
-      "fname": "james",
-      "lname": "bond",
-      "id": "1",
-      "gender": "male",
-      "age": "20",
-      "email": "james@gmail.com"
+      "fname": "Nero",
+      "lname": "Atkinson",
+      "email": "xegituno@mailinator.com",
+      "age": "Debitis facilis pari",
+      "id": "QCQP7t8"
     },
     {
-      "fname": "micheal",
-      "lname": "clark",
-      "id": "2",
-      "gender": "male",
-      "age": "20",
-      "email": "micheal@gmail.com"
-    },
-    {
-      "fname": "jhonny",
-      "lname": "bairtow",
-      "id": "3",
-      "gender": "male",
-      "age": "20",
-      "email": "jhonny@gmail.com"
-    },
-    {
-      "fname": "kishan",
-      "lname": "solanki",
-      "email": "k@gmail.com",
-      "age": "20",
-      "id": "Ryug53D"
+      "fname": "Alma",
+      "lname": "Pena",
+      "email": "berupova@mailinator.com",
+      "age": "Ipsa occaecat iste ",
+      "id": "MTs1kDV"
     }
   ]
 }

@@ -37,7 +37,10 @@ function TableList() {
                 <td>
                   <button
                     className="btn btn-danger deletebtn"
-                    onClick={() => handleDelete(data.id)}
+                    onClick={() => {
+                      handleDelete(data.id);
+                      window.confirm("Are you sure ?");
+                    }}
                   >
                     <DeleteIcon />
                   </button>

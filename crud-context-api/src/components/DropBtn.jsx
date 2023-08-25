@@ -7,26 +7,26 @@ import Select from "@mui/material/Select";
 import { useState } from "react";
 
 function DropBtn() {
-  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setGender(event.target.value);
   };
 
   return (
     <div>
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+          <InputLabel id="demo-simple-select-label">Gender</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={age}
+            value={gender}
             label="Gender"
             onChange={handleChange}
           >
-            <MenuItem value={10}>Male</MenuItem>
-            <MenuItem value={20}>Female</MenuItem>
+            <MenuItem>Male</MenuItem>
+            <MenuItem>Female</MenuItem>
           </Select>
         </FormControl>
       </Box>
